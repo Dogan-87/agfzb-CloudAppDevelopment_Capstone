@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["localhost","django-fstck-capstoneapp.us-south.cf.appdomain.cloud"]
+ALLOWED_HOSTS = ["localhost","django-fstck-capstoneapp.us-south.cf.appdomain.cloud","djangocapstoneapp.mybluemix.net"]
 
 
 # Application definition
