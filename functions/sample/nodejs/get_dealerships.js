@@ -1,34 +1,29 @@
+const Cloudant = require('@cloudant/cloudant');
+
+secret={
+    "COUCH_URL": "",
+    "IAM_API_KEY": "",
+    "COUCH_USERNAME": ""
+}
+
 function main(params) {  
-     
-    secret={ 
-    "COUCH_URL": "Your URL", 
-    "IAM_API_KEY": "Your API KEY", 
-    "COUCH_USERNAME": "Your Username" 
-    }; 
-
     console.log(params);  
-
+    
     return new Promise(function (resolve, reject) {  
-
-       const Cloudant = require('@cloudant/cloudant');  
-       
-       const cloudant = Cloudant({  
+        const cloudant = Cloudant({  
            url: secret.COUCH_URL,  
            plugins: {iamauth: {iamApiKey:secret.IAM_API_KEY}}  
-       }); 
-
-       const dealershipDb = cloudant.use('dealerships');  
-
+        }); 
+        const dealershipDb = cloudant.use('dealerships');  
         if (params.state) {  
             // return dealership with this state  
             dealershipDb.find({ 
-
                 "selector": { 
                 "state": { 
                     "$eq": params.state   
                     } 
                 } 
-                }, 
+            }, 
 
                 function (err, result) {  
 
@@ -39,11 +34,9 @@ function main(params) {
 
                     let code=200;  
 
-                    if (result.docs.length==0)  
-
-                    {  
-                    code= 404;  
-                    }  
+                if (result.docs.length==0){  
+                    { code= 404; } 
+                }
 
                     resolve({  
                     statusCode: code,  
@@ -63,11 +56,11 @@ function main(params) {
                    reject(err); 
                 }  
 
-                let code=200;  
-                    if (result.docs.length==0)  
-                    {  
-                    code= 404; 
-                    }  
+                let code=200; 
+                
+                if (result.docs.length==0){  
+                    { code= 404; } 
+                }
 
                 resolve({  
                     statusCode: code,  
@@ -87,7 +80,6 @@ function main(params) {
                 }  
 
                 resolve({  
-
                     statusCode: 200,  
                     headers: { 'Content-Type': 'application/json' },  
                     body: result  
@@ -96,4 +88,3 @@ function main(params) {
         }  
     });  
 }  
-

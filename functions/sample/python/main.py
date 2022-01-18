@@ -12,15 +12,14 @@ from cloudant.error import CloudantException
 import requests
 
 secret={
-    "COUCH_URL": "Your URL", 
-    "IAM_API_KEY": "Your API KEY", 
-    "COUCH_USERNAME": "Your Username" 
+    "COUCH_URL": "https://45c14cd9-04bc-467b-a5fc-65c842636775-bluemix.cloudantnosqldb.appdomain.cloud",
+    "IAM_API_KEY": "-lTAU8tc-rHV1d0JQqwjHTyD7SYClm4nPLWPG7yML22F",
+    "COUCH_USERNAME": "45c14cd9-04bc-467b-a5fc-65c842636775-bluemix"
 }
 
-def main(dict):
+def main():
     databaseName = "dealerships"
     
-
     try:
         client = Cloudant.iam(
             account_name=secret["COUCH_USERNAME"],
@@ -37,3 +36,6 @@ def main(dict):
         return {"error": err}
 
     return {"dbs": client.all_dbs()}
+
+databases= main()
+print(databases)
