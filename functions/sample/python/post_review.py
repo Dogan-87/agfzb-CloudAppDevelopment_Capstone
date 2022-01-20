@@ -8,11 +8,10 @@ secret={
     "COUCH_USERNAME": "45c14cd9-04bc-467b-a5fc-65c842636775-bluemix"
 }
 
-def main(dict):
-    databaseName = "reviews"
 
-    try:
-        client = Cloudant.iam(
+
+
+client = Cloudant.iam(
         account_name=secret["COUCH_USERNAME"],
         api_key=secret["IAM_API_KEY"],
         connect=True,
@@ -34,3 +33,11 @@ def post_request(url, json_payload, **kwargs):
 
     print(f"With status {response.status_code}")
     print(f"Response: {response.text}")
+
+a= post_request("https://45c14cd9-04bc-467b-a5fc-65c842636775-bluemix.cloudantnosqldb.appdomain.cloud",
+{ "review": { "id": 1114, "name": "Upkar Lidder", "dealership": 15,
+ "review": "Great service!", "purchase": "false", "another": "field",
+  "purchase_date": "02/16/2021", "car_make": "Audi", "car_model": "Car",
+   "car_year": 2021 } }
+)
+print(a)
