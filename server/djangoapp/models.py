@@ -38,7 +38,7 @@ class CarModel(models.Model):
 
     carmake = models.ForeignKey(CarMake, null= True, on_delete=models.CASCADE)
     name = models.CharField(null= False, max_length=30, default='Audi X8')
-    id = models.IntegerField(primary_key = True, null=False)
+    dealer_id = models.IntegerField(primary_key = True, null=False)
     car_type = models.CharField(null= False, max_length=20, choices= CAR_CHOICES, default=SEDAN)
     year = models.DateField(null= True)
 
