@@ -1,4 +1,8 @@
-from django.db import models
+try:
+    from django.db import models
+except Exception:
+    print("There was an error loading django modules. Do you have django installed?")
+    sys.exit()
 from django.utils.timezone import now
 
 
@@ -35,13 +39,13 @@ class CarModel(models.Model):
     carmake = models.ForeignKey(CarMake, null= True, on_delete=models.CASCADE)
     name = models.CharField(null= False, max_length=30, default='Audi X8')
     dealer_id = models.IntegerField(null=True)
-    cartype = models.CharField(null= False, max_length=20, choices= CAR_CHOICES, default=SEDAN)
+    car_type = models.CharField(null= False, max_length=20, choices= CAR_CHOICES, default=SEDAN)
     year = models.DateField(null= True)
 
     def __str__(self):
         return "Name: " + self.name + \
                 " Make Name: "+ self.make.name + \
-                " Type: " + self.c_type + \
+                " Type: " + self.car_type + \
                 " Dealer ID: " + str(self.dealer_id)+ \
                 " Year: " + str(self.year)
 
