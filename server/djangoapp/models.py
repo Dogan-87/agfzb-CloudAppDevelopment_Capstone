@@ -43,8 +43,8 @@ class CarModel(models.Model):
     year = models.DateField(null= True)
 
     def __str__(self):
-        return "Name: " + self.name + \
-                " Make Name: "+ self.make.name + \
+        return  " Make Name: "+ self.carmake.name + \
+                " Car Model: " + self.name + \
                 " Type: " + self.car_type + \
                 " Dealer ID: " + str(self.dealer_id)+ \
                 " Year: " + str(self.year)
