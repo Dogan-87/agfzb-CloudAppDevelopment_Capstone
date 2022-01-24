@@ -29,7 +29,19 @@ def get_request(url, **kwargs):
 
 # Create a `post_request` to make HTTP POST requests
 # e.g., response = requests.post(url, params=kwargs, json=payload)
-
+def post_request(url, payload, **kwargs):
+    print(url)
+    print(payload)
+    print(kwargs)
+    json_obj = json_payload["review"]
+    print(json_obj)
+    try:
+        response = requests.post(url, params=kwargs, json=payload)
+    except Exception as e:
+        print("Error" ,e)
+    print("Status Code ", {response.status_code})
+    data = json.loads(response.text)
+    return data  
 
 # Create a get_dealers_from_cf method to get dealers from a cloud function
 # def get_dealers_from_cf(url, **kwargs):
@@ -72,11 +84,13 @@ def get_dealer_reviews_by_id_from_cf(url, dealer_id):
     results = []
     json_result = get_request(url, dealerId=dealer_id)
     if json_result:
-        print(json_result)
         reviews = json_result['docs']
+        print(dealer_id)
+        print(reviews)
         for review in reviews:
+            #if review["id"]==dealer_id:
             try:
-                review_obj = models.DealerReview(
+                review_obj = DealerReview(
                     name = review["name"], 
                     dealership = review["dealership"], 
                     review = review["review"], 
@@ -102,7 +116,7 @@ def get_dealer_reviews_by_id_from_cf(url, dealer_id):
                 
             review_obj.sentiment = analyze_review_sentiments(review_obj.review)
             print(review_obj.sentiment)
-                    
+                        
             results.append(review_obj)
 
     return results
