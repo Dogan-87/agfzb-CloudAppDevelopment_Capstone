@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dealership Review</title>
-    {% load static %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-
-    <body>
-
-    <!--Add a nav bar here -->
-
+{% extends 'djangoapp/base.html' %}{% block content %}
     <!-- Add reviews as cards -->
     <main class="container" style="padding: 3%;">
+        11
+        {{ review_obj.name}}
+        22
+        {{ reviews}}
+        33
+        {{ dealer_id}}
+        44
+        {% for dealer in dealerships%}
+            {% if {{dealer.id}} == dealer_id %}
+                aaa
+                {{dealer.full_name}}
+            {% endif %}
+        {% endfor %}
+        55
         <div class="card-columns">
             {% for review in reviews %}
                 <div class="card" style="height: 300px; overflow: scroll; overflow-x: hidden;">
@@ -26,6 +28,5 @@
             {% endfor %}
         </div>
     </main>
-    </body>
 
-</html>
+{% endblock %}

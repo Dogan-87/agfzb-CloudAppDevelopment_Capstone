@@ -88,37 +88,38 @@ def get_dealer_reviews_by_id_from_cf(url, dealer_id):
         print(dealer_id)
         print(reviews)
         for review in reviews:
-            #if review["id"]==dealer_id:
-            try:
-                review_obj = DealerReview(
-                    name = review["name"], 
-                    dealership = review["dealership"], 
-                    review = review["review"], 
-                    purchase=review["purchase"],
-                    purchase_date = review["purchase_date"], 
-                    car_make = review['car_make'],
-                    car_model = review['car_model'], 
-                    car_year= review['car_year'], 
-                    sentiment= "none",
-                    id = review["id"])
-            except:
-                review_obj = DealerReview(
-                    name = review["name"], 
-                    dealership = review["dealership"], 
-                    review = review["review"], 
-                    purchase=review["purchase"],
-                    purchase_date = 'none', 
-                    car_make = 'none',
-                    car_model = 'none', 
-                    car_year= 'none', 
-                    sentiment= "none",
-                    id = review["id"])
-                
-            review_obj.sentiment = analyze_review_sentiments(review_obj.review)
-            print(review_obj.sentiment)
-                        
-            results.append(review_obj)
-
+            #change review["id"] to review["dealership"]
+            if review["id"]==dealer_id:
+                try:
+                    review_obj = DealerReview(
+                        name = review["name"], 
+                        dealership = review["dealership"], 
+                        review = review["review"], 
+                        purchase=review["purchase"],
+                        purchase_date = review["purchase_date"], 
+                        car_make = review['car_make'],
+                        car_model = review['car_model'], 
+                        car_year= review['car_year'], 
+                        sentiment= "none",
+                        id = review["id"])
+                except:
+                    review_obj = DealerReview(
+                        name = review["name"], 
+                        dealership = review["dealership"], 
+                        review = review["review"], 
+                        purchase=review["purchase"],
+                        purchase_date = 'none', 
+                        car_make = 'none',
+                        car_model = 'none', 
+                        car_year= 'none', 
+                        sentiment= "none",
+                        id = review["id"])
+                    
+                review_obj.sentiment = analyze_review_sentiments(review_obj.review)
+                print(review_obj.sentiment)
+                            
+                results.append(review_obj)
+    print(review_obj)
     return results
 
 # Create an `analyze_review_sentiments` method to call Watson NLU and analyze text

@@ -115,7 +115,9 @@ def get_dealer_details(request, dealer_id):
     context = {}
     if request.method == "GET":
         url = 'https://5b09b236.us-south.apigw.appdomain.cloud/api/review'
-        context = {"reviews":  get_dealer_reviews_by_id_from_cf(url, dealer_id)}
+        url2 = "https://5b09b236.us-south.apigw.appdomain.cloud/api/dealership"
+        context = {"reviews":  get_dealer_reviews_by_id_from_cf(url, dealer_id),
+                   "dealerships": get_dealers_from_cf(url2)}
         return render(request, 'djangoapp/dealer_details.html', context)
 
 # Create a `add_review` view to submit a review
