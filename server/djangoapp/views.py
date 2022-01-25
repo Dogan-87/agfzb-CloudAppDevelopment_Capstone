@@ -151,7 +151,11 @@ def add_review(request, dealer_id):
                 }
             if form.get("purchasecheck"):
                 review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
+                print(review)
+                print("111")
+                print(form)
                 car = CarModel.objects.get(pk=form["car"])
+                print("22")
                 review["car_make"] = car.carmake.name
                 review["car_model"] = car.name
                 review["car_year"]= car.year.strftime("%Y")
@@ -159,7 +163,7 @@ def add_review(request, dealer_id):
             json_payload = {"review": review}
             print (json_payload)
             url = "https://5b09b236.us-south.apigw.appdomain.cloud/api/review"
-            post_request(url, json_payload, dealerId=dealer_id)
+            post_request(url, json_payload, dealerId=int(dealer_id))
             return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
         else:
             return redirect("/djangoapp/login")
