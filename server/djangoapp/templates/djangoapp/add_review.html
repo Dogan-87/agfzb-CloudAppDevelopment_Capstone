@@ -2,6 +2,8 @@
 
     <main class="container">
         <!--Add review form here -->
+        {{dealer_id}}
+        {{dealer_name}}
         {% for dealer in dealers %}
             <form action="/djangoapp/dealer/{{dealer_id}}/add_review/" method="post">
                 {% csrf_token %}

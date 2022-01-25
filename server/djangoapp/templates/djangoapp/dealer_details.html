@@ -1,20 +1,11 @@
 {% extends 'djangoapp/base.html' %}{% block content %}
     <!-- Add reviews as cards -->
     <main class="container" style="padding: 3%;">
-        11
-        {{ review_obj.name}}
-        22
-        {{ reviews}}
-        33
-        {{ dealer_id}}
-        44
         {% for dealer in dealerships%}
-            {% if {{dealer.id}} == dealer_id %}
-                aaa
+            {% if dealer.id ==  dealer_id %}                     
                 {{dealer.full_name}}
             {% endif %}
         {% endfor %}
-        55
         <div class="card-columns">
             {% for review in reviews %}
                 <div class="card" style="height: 300px; overflow: scroll; overflow-x: hidden;">
