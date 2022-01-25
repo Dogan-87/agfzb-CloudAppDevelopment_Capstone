@@ -4,10 +4,10 @@
         <!--Add review form here -->
         {{dealer_id}}
         {{dealer_name}}
-        {% for dealer in dealers %}
+        
             <form action="/djangoapp/dealer/{{dealer_id}}/add_review/" method="post">
                 {% csrf_token %}
-        {% endfor %}
+        
                 <div class="form-group">
                     <label for="content">Enter the review content:</label>
                     <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
@@ -28,7 +28,7 @@
                     <label for="purchasedate">Select your purchase date:</label>
                     <input class="form-control" type="text" name="purchasedate" id="purchasedate">
                 </div>
-               <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </main>
 
