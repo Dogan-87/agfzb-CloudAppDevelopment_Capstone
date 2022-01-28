@@ -29,18 +29,21 @@ def get_request(url, **kwargs):
 
 # Create a `post_request` to make HTTP POST requests
 # e.g., response = requests.post(url, params=kwargs, json=payload)
-def post_request(url, payload, dealerId):
+def post_request(url, payload, **kwargs):
     print(url)
+    #payload["review"]["id"]=1120
     print(payload)
     print(kwargs)
-    json_obj = json_payload["review"]
+    json_obj = payload["review"]
     print(json_obj)
     try:
         response = requests.post(url, params=kwargs, json=payload)
+        print(response)
     except Exception as e:
         print("Error" ,e)
     print("Status Code ", {response.status_code})
     data = json.loads(response.text)
+    print(data)
     return data  
 
 # Create a get_dealers_from_cf method to get dealers from a cloud function
@@ -89,7 +92,7 @@ def get_dealer_reviews_by_id_from_cf(url, dealer_id):
         print(reviews)
         for review in reviews:
             #change review["id"] to review["dealership"]
-            if review["id"]==dealer_id:
+            if review["dealership"]==dealer_id:
                 try:
                     review_obj = DealerReview(
                         name = review["name"], 
@@ -135,19 +138,21 @@ def analyze_review_sentiments(dealerreview, **kwargs):
     
     natural_language_understanding = NaturalLanguageUnderstandingV1(version=version,authenticator=authenticator)
     natural_language_understanding.set_service_url(NLU_URL)
+    try:
+        response = natural_language_understanding.analyze(
+            text=text_to_analyze,
+            features= Features(sentiment= SentimentOptions())
+        ).get_result()
+        
+        print(json.dumps(response))
+        sentiment_score = str(response["sentiment"]["document"]["score"])
+        sentiment_label = response["sentiment"]["document"]["label"]
+        print(sentiment_score)
+        print(sentiment_label)
+        sentimentresult = sentiment_label
+    except:
+        sentimentresult = "neutral"
 
-    response = natural_language_understanding.analyze(
-        text=text_to_analyze,
-        features= Features(sentiment= SentimentOptions())
-    ).get_result()
-    
-    print(json.dumps(response))
-    sentiment_score = str(response["sentiment"]["document"]["score"])
-    sentiment_label = response["sentiment"]["document"]["label"]
-    print(sentiment_score)
-    print(sentiment_label)
-    sentimentresult = sentiment_label
-    
     return sentimentresult
 
 
