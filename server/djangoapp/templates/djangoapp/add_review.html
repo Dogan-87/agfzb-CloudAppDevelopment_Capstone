@@ -4,7 +4,7 @@
     <!--Add review form here -->
     {{dealer_id}}
     {{dealer_name}}
-        
+    {{dealer_id}}
         <form action="/djangoapp/dealer/{{dealer_id}}/add_review/" method="post">
             {% csrf_token %}
         
@@ -20,9 +20,11 @@
                 <label for="car">Select your car (model-make-year):</label>
                 <select name="car" id="car" class="form-select" required>
                     {% for car in cars %}
-                    <!--% if car.dealer_id == dealer_id % -->
-                        <option selected value={{car.dealer_id}}>{{car.dealer_id}}--{{car.name}}-{{car.carmake.name}}-{{ car.year|date:"Y" }}</option>
+                        {% if car.dealer_id == dealer_id %}   
+                        <option selected value={{car.dealer_id}}>{{dealer_id}}--{{car.dealer_id}}--{{car.name}}-{{car.carmake.name}}-{{ car.year|date:"Y" }}</option>
+                        {% endif %}
                     {% endfor %}
+                    
                 </select>
             </div>
             <div class="form-group" >

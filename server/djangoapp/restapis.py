@@ -90,9 +90,13 @@ def get_dealer_reviews_by_id_from_cf(url, dealer_id):
         reviews = json_result['docs']
         print(dealer_id)
         print(reviews)
+        a=[]
+        for review in reviews:
+            a.append(review["dealership"])
+        print(a)
         for review in reviews:
             #change review["id"] to review["dealership"]
-            if review["dealership"]==dealer_id:
+            if (dealer_id in a) and (review["dealership"]==dealer_id):
                 try:
                     review_obj = DealerReview(
                         name = review["name"], 
@@ -119,10 +123,11 @@ def get_dealer_reviews_by_id_from_cf(url, dealer_id):
                         id = review["id"])
                     
                 review_obj.sentiment = analyze_review_sentiments(review_obj.review)
-                print(review_obj.sentiment)
-                            
+                print(review_obj.sentiment) 
                 results.append(review_obj)
-    print(review_obj)
+        
+                
+    print(results)
     return results
 
 # Create an `analyze_review_sentiments` method to call Watson NLU and analyze text

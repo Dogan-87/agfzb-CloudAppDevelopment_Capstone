@@ -11,6 +11,7 @@
         {% else %} 
             <a class="btn btn-link" href="{% url 'djangoapp:login' %}">Add Review</a>  
         {% endif %}
+        {% if reviews %}
         <div class="card-columns">
             {% for review in reviews %}
                 <div class="card" style="height: 300px; overflow: scroll; overflow-x: hidden;">
@@ -23,6 +24,12 @@
                 </div>
             {% endfor %}
         </div>
+        {% else %}
+        </br>
+        Currently no Reviews added for this dealer
+        </br>
+        Be first to make review for the dealer    
+        {% endif %}
     </main>
 
 {% endblock %}
