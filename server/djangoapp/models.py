@@ -38,7 +38,7 @@ class CarModel(models.Model):
 
     carmake = models.ForeignKey(CarMake, null= True, on_delete=models.CASCADE)
     name = models.CharField(null= False, max_length=30, default='Audi X8')
-    dealer_id = models.IntegerField(null=False)
+    dealer_id = models.IntegerField(primary_key=True ,null=False)
     car_type = models.CharField(null= False, max_length=20, choices= CAR_CHOICES, default=SEDAN)
     year = models.DateField(null= True)
 
@@ -46,7 +46,7 @@ class CarModel(models.Model):
         return  " Make Name: "+ self.carmake.name + \
                 " Car Model: " + self.name + \
                 " Type: " + self.car_type + \
-                " Dealer ID: " + str(self.dealer_id)+ \
+                " Model ID: " + str(self.dealer_id)+ \
                 " Year: " + str(self.year)
 
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data

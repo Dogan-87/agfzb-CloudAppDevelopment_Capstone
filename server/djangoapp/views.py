@@ -144,19 +144,22 @@ def add_review(request, dealer_id):
         if request.user.is_authenticated:
             form = request.POST
             review = {
-                "name": "{request.user.first_name} {request.user.last_name}",
+                "name": request.user.first_name + " " + request.user.last_name,
                 "dealership": dealer_id,
                 "review": form["content"],
                 "purchase": form.get("purchasecheck"),
+                "id" : request.user.id
                 }
-                #add review["id"]= 
+            #add review["id"]= 1121
             if form.get("purchasecheck"):
+                review["purchase"]=True
                 review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
                 print(review)
                 print("111")
                 print(form)
                 print(form['car'])
                 car = CarModel.objects.get(pk=form["car"])
+                #car = CarModel.objects.get(dealer_id=form["car"])
                 print("22")
                 review["car_make"] = car.carmake.name
                 print("333")
@@ -164,6 +167,8 @@ def add_review(request, dealer_id):
                 print("44")
                 review["car_year"]= car.year.strftime("%Y")
                 print("55")
+            else:
+                review["purchase"]=False
 
             json_payload = {"review": review}
             print (json_payload)

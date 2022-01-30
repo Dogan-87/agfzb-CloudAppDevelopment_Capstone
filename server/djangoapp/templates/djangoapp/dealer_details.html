@@ -3,7 +3,7 @@
     <main class="container" style="padding: 3%;">
         {% for dealer in dealerships%}
             {% if dealer.id ==  dealer_id %}                     
-                {{dealer.full_name}}
+            {{dealer.full_name}}
             {% endif %}
         {% endfor %}
         {% if user.is_authenticated %}
