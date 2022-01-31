@@ -27,5 +27,4 @@ spec:
         - containerPort: 8000
           protocol: TCP
       restartPolicy: Always
-      imagePullSecrets: dealership-secret
   replicas: 1
