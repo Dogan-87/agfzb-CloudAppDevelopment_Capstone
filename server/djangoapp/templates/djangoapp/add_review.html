@@ -2,9 +2,9 @@
 </br></br>
 <main class="container">
     <!--Add review form here -->
-    <a class="btn btn-link" href="{% url 'djangoapp:dealer_details' dealer_id=dealer_id %}">{{dealer_id}}) {{dealer_name}}</a>
+    <a class="btn btn-link" href="{% url 'djangoapp:dealer_details' dealer_id=dealer_id %}"><h3>{{dealer_id}}) {{dealer_name}}</h3></a>
     </br>
-    {{user.first_name}} {{user.last_name}} {{user.id}}
+    <h5>User Name: {{user.first_name}} {{user.last_name}} User Id: {{user.id}}</h5>
         <form action="/djangoapp/dealer/{{dealer_id}}/add_review/" method="post">
             {% csrf_token %}
         
@@ -22,7 +22,7 @@
                     {% for car in cars %}
 
                           
-                        <option selected value={{car.dealer_id}}>{{dealer_id}}--{{car.dealer_id}}--{{car.name}}-{{car.carmake.name}}-{{ car.year|date:"Y" }}</option>
+                        <option selected value={{car.dealer_id}}><!--{{dealer_id}}--{{car.dealer_id}}-->{{car.name}}-{{car.carmake.name}}-{{ car.year|date:"Y" }}</option>
                         
 
                     {% endfor %}
