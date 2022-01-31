@@ -1,3 +1,7 @@
+https://django-fstck-capstoneapp.us-south.cf.appdomain.cloud/djangoapp/
+
+https://djangocapstoneapp.mybluemix.net/djangoapp/
+
 # Final Project Template
 
 The final project for this course has several steps that you must complete. 
