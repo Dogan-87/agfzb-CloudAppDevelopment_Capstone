@@ -20,11 +20,12 @@ spec:
         run: dealership
     spec:
       containers:
-      - image: us.icr.io/bestcardealer-capstone/dealership:latest
+      - image: us.icr.io/$MY_USERNAME/dealership:latest
         imagePullPolicy: Always
         name: dealership
         ports:
         - containerPort: 8000
           protocol: TCP
       restartPolicy: Always
+      imagePullSecrets: dealership-secret
   replicas: 1
